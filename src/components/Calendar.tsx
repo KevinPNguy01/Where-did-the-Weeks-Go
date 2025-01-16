@@ -1,10 +1,13 @@
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+
 export function Calendar() {
-    const lifeExpectancy = 77.43;
-    const start = new Date(2004, 0, 21);
+    const {birthDate, lifeExpectancy} = useContext(UserContext);
+
     const today = new Date();
-    const dateBefore = Date.UTC(0, today.getMonth(), today.getDate()) < Date.UTC(0, start.getMonth(), start.getDate());
-    const yearsPassed = today.getFullYear() - start.getFullYear() - (dateBefore ? 1: 0);
-    const weeksPassed = Math.floor((today.getTime() - new Date(today.getFullYear() - (dateBefore ? 1 : 0), start.getMonth(), start.getDate()).getTime()) / (1000 * 60 * 60 * 24 * 7));
+    const dateBefore = Date.UTC(0, today.getMonth(), today.getDate()) < Date.UTC(0, birthDate.getMonth(), birthDate.getDate());
+    const yearsPassed = today.getFullYear() - birthDate.getFullYear() - (dateBefore ? 1: 0);
+    const weeksPassed = Math.floor((today.getTime() - new Date(today.getFullYear() - (dateBefore ? 1 : 0), birthDate.getMonth(), birthDate.getDate()).getTime()) / (1000 * 60 * 60 * 24 * 7));
     const currentWeekIndex = 52 * yearsPassed + weeksPassed;
     return (
         <table className="border-separate">
@@ -34,6 +37,6 @@ function Year({index, numWeeks, events}: {index: number, numWeeks: number, event
 
 function Week({index, events}: {index: number, events: number[]}) {
     return (
-        <td className={`p-1.5 rounded-sm bg-red-500 ${index < events[0] ? "bg-black" : "bg-green-500"}`}/>
+        <td className={`p-1.5 rounded-sm ${index < events[0] ? "bg-black" : "bg-green-500"}`}/>
     )
 }
