@@ -5,9 +5,16 @@ import TextField from "@mui/material/TextField/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker/DatePicker";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { AddEvent } from "./AddEvent";
+import { Dayjs } from "dayjs";
 
 export function UserInfoForm() {
     const {birthDate, setBirthDate, lifeExpectancy, setLifeExpectancy} = useContext(UserContext);
+
+    const birthDateChangeHandler = (e: Dayjs | null) => {
+        if (!e) return;
+        setBirthDate(e);
+    }
 
     const lifeExpectancyChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setLifeExpectancy(Math.max(0, Math.min(120, parseFloat(e.target.value))));
@@ -19,7 +26,7 @@ export function UserInfoForm() {
             component="form" 
             sx={{backgroundColor:"background.paper"}}
         >
-            <DatePicker onChange={(e) => {if (e) setBirthDate(e.toDate())}} label="Date of Birth"/>
+            <DatePicker value={birthDate} onChange={birthDateChangeHandler} label="Date of Birth"/>
             <TextField 
                 label="Life Expectancy"
                 type="number"
@@ -31,6 +38,7 @@ export function UserInfoForm() {
                         }
                 }}
             />
+            <AddEvent/>
         </Box>
     )
 }

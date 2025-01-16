@@ -3,9 +3,6 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
     palette: {
 		mode: 'dark',
-		primary: {
-			main: '#555',
-		},
 		text: {
 			primary: 'rgba(255,255,255,0.87)',
 		},
@@ -14,4 +11,9 @@ export const theme = createTheme({
 			default: '#333',
 		},
     },
+    typography: {
+        allVariants: {
+            color: 'rgba(255,255,255,0.87)',
+          },      
+    }
 });
