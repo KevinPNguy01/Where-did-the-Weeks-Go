@@ -2,7 +2,7 @@ import { Dayjs } from "dayjs"
 
 export type LifeActivity = {
     name: string
-    timeSpent: number
+    timeSpent: Dayjs
     everyday: boolean
     start: Dayjs
     end: Dayjs

@@ -1,20 +1,26 @@
 import Dialog from "@mui/material/Dialog/Dialog";
-import { AddEventMenu } from "./AddEventMenu";
-import { useState } from "react";
+import { EventMenu } from "./EventMenu";
+import { useContext, useState } from "react";
 import Fab from "@mui/material/Fab/Fab";
 import AddIcon from '@mui/icons-material/Add';
+import { UserContext } from "../../contexts/UserContext";
+import { newActivity } from "../../utils/activity";
 
 export function AddEventButton() {
+    const {activities, setActivities} = useContext(UserContext);
     const [open, setOpen] = useState(false);
+    let activity = newActivity();
 
     const handleClose = () => setOpen(false);
     const handleOpen = () => setOpen(true);
+    const handleSubmit = () => {
+        setActivities(activities.concat(activity));
+        handleClose();
+    }
 
     return (
         <>
-            <Dialog open={open} onClose={handleClose}>
-                <AddEventMenu onClose={handleClose}/>
-            </Dialog>
+            <EventMenu edit={false} open={open} onClose={handleClose} activity={activity} onSubmit={handleSubmit}/>
             <Fab onClick={handleOpen} color="primary">
                 <AddIcon/>
             </Fab>

@@ -6,25 +6,29 @@ import ThemeProvider from '@mui/material/styles/ThemeProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { UserContext } from './contexts/UserContext'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { LifeActivity } from './types/LifeActivity'
 import Box from '@mui/material/Box/Box'
 import Typography from '@mui/material/Typography/Typography'
 
 function App() {
-    const [birthDate, setBirthDate] = useState(dayjs());
+    const [birthDate, setBirthDate] = useState(dayjs("2004-01-21"));
     const [lifeExpectancy, setLifeExpectancy] = useState(77.43);
-    const [activities, setActivities] = useState<LifeActivity[]>([
-        {
-            name: "Sleep",
-            start: dayjs(),
-            end: dayjs(),
-            timeSpent: 8 * 60,
-            everyday: true,
-            color: "#f0f"
-        }
-    ]);
+    const [activities, setActivities] = useState<LifeActivity[]>([]);
+
+    useEffect(() => {
+        setActivities([
+            {
+                name: "Sleep",
+                start: dayjs(),
+                end: dayjs(),
+                timeSpent: dayjs("08:00", "HH:mm"),
+                everyday: true,
+                color: "#907BD2"
+            }
+        ]);
+    }, []);
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>

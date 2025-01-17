@@ -17,7 +17,7 @@ export function Calendar({activities}: {activities: LifeActivity[]}) {
                 startDate = birthDate.unix() < today.unix() ? today : birthDate;
                 endDate = today.add(lifeExpectancy, "years").subtract(today.unix() - birthDate.unix(), "seconds");
             }
-            return [diffWeeks(startDate, endDate) * timeSpent / 24 / 60, color];
+            return [diffWeeks(startDate, endDate) * (timeSpent.hour() * 60 + timeSpent.minute()) / 24 / 60, color];
         }).filter(([weeks]) => weeks != 0)
     ) as [number, string][];
 
@@ -61,7 +61,7 @@ function Week({index, events}: {index: number, events: [number, string][]}) {
             style={{
                 backgroundColor: color
             }}
-            className={`p-[0.333rem] border ${color === "" ? "border-[#bbb]" : "border-white/0"} rounded-sm `}
+            className={`p-0.5 border ${color === "" ? "border-[#888]" : "border-white/0"} rounded-sm`}
         />
     )
 }
