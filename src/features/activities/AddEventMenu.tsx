@@ -1,18 +1,18 @@
-import { Button, FormControlLabel, Switch, Typography } from "@mui/material";
 import Box from "@mui/material/Box/Box";
 import TextField from "@mui/material/TextField/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker/DatePicker";
-import { FieldChangeHandler } from "@mui/x-date-pickers/internals/hooks/useField/useField.types";
-import { TimeValidationError } from "@mui/x-date-pickers/models/validation";
 import { TimeField } from "@mui/x-date-pickers/TimeField/TimeField";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { useContext, useState } from "react";
-import { UserContext } from "../contexts/UserContext";
-import { diffWeeks } from "../utils/time";
+import { UserContext } from "../../contexts/UserContext";
+import Typography from "@mui/material/Typography/Typography";
+import FormControlLabel from "@mui/material/FormControlLabel/FormControlLabel";
+import Switch from "@mui/material/Switch/Switch";
 import { MuiColorInput } from "mui-color-input";
+import Button from "@mui/material/Button/Button";
 
-export function AddEvent() {
-    const {birthDate, lifeExpectancy, activities, setActivities} = useContext(UserContext);
+export function AddEventMenu({onClose}: {onClose: () => void}) {
+    const {activities, setActivities} = useContext(UserContext);
     const [color, setColor] = useState("#f80");
     const [name, setName] = useState("");
     const [startDate, setStartDate] = useState(dayjs());
@@ -21,10 +21,10 @@ export function AddEvent() {
     const [everyday, setEveryday] = useState(false);
 
     const submitHandler = () => {
-        const today = dayjs();
         let start = startDate;
         let end = endDate;
         setActivities([...activities, {color, name, start, end, everyday, timeSpent: timeSpent.get("hours") * 60 + timeSpent.get("minutes")}])
+        onClose();
     }
 
     return (

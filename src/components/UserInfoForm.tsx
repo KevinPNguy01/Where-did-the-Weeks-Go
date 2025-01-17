@@ -1,13 +1,12 @@
 import Box from "@mui/material/Box/Box";
-import Card from "@mui/material/Card/Card";
 import InputAdornment from "@mui/material/InputAdornment/InputAdornment";
 import TextField from "@mui/material/TextField/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker/DatePicker";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-import { AddEvent } from "./AddEvent";
 import { Dayjs } from "dayjs";
-import { ActivityList } from "./ActivityList";
+import { ActivityList } from "../features/activities/ActivityList";
+import { AddEventButton } from "../features/activities/AddEventButton";
 
 export function UserInfoForm() {
     const {birthDate, setBirthDate, lifeExpectancy, setLifeExpectancy} = useContext(UserContext);
@@ -39,8 +38,8 @@ export function UserInfoForm() {
                         }
                 }}
             />
-            <AddEvent/>
             <ActivityList/>
+            <AddEventButton/>
         </Box>
     )
 }

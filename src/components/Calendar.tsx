@@ -19,7 +19,7 @@ export function Calendar({activities}: {activities: LifeActivity[]}) {
             }
             return [diffWeeks(startDate, endDate) * timeSpent / 24 / 60, color];
         }).filter(([weeks]) => weeks != 0)
-    );
+    ) as [number, string][];
 
     return (
         <table className="border-separate border-spacing-[2px]">
