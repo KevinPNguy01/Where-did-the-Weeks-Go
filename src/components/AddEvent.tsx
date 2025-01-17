@@ -9,9 +9,11 @@ import dayjs, { Dayjs } from "dayjs";
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { diffWeeks } from "../utils/time";
+import { MuiColorInput } from "mui-color-input";
 
 export function AddEvent() {
     const {birthDate, lifeExpectancy, activities, setActivities} = useContext(UserContext);
+    const [color, setColor] = useState("#f80");
     const [name, setName] = useState("");
     const [startDate, setStartDate] = useState(dayjs());
     const [endDate, setEndDate] = useState(dayjs().add(1, "year"));
@@ -22,7 +24,7 @@ export function AddEvent() {
         const today = dayjs();
         let start = startDate;
         let end = endDate;
-        setActivities([...activities, {name, start, end, everyday, timeSpent: timeSpent.get("hours") * 60 + timeSpent.get("minutes")}])
+        setActivities([...activities, {color, name, start, end, everyday, timeSpent: timeSpent.get("hours") * 60 + timeSpent.get("minutes")}])
     }
 
     return (
@@ -46,6 +48,7 @@ export function AddEvent() {
                 <DatePicker disabled={everyday} value={startDate} onChange={(e) => {if (e) setStartDate(e)}} label="From"/>
                 <DatePicker disabled={everyday} value={endDate} onChange={(e) => {if (e) setEndDate(e)}} label="To"/>
             </Box>
+            <MuiColorInput label="Color" format="hex" value={color} onChange={(e) => setColor(e)}/>
             <Button onClick={submitHandler}>Add Event</Button>
         </Box>
     )

@@ -6,4 +6,5 @@ export type LifeActivity = {
     everyday: boolean
     start: Dayjs
     end: Dayjs
+    color: string
 }

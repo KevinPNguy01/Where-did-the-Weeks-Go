@@ -9,19 +9,18 @@ export function Calendar({activities}: {activities: LifeActivity[]}) {
 
     const today = dayjs();
 
-    const events = [diffWeeks(birthDate, today)].concat(
-        activities.map(({start, end, timeSpent, everyday}) => {
+    const events = [[diffWeeks(birthDate, today), "#444"]].concat(
+        activities.map(({start, end, timeSpent, everyday, color}) => {
             let startDate = start.unix() < today.unix() ? today : start;
             let endDate = end;
             if (everyday) {
                 startDate = birthDate.unix() < today.unix() ? today : birthDate;
                 endDate = today.add(lifeExpectancy, "years").subtract(today.unix() - birthDate.unix(), "seconds");
             }
-            if (endDate.unix() < startDate.unix()) 
-                return 0;
-            return diffWeeks(startDate, endDate) * timeSpent / 24 / 60;
-        })
+            return [diffWeeks(startDate, endDate) * timeSpent / 24 / 60, color];
+        }).filter(([weeks]) => weeks != 0)
     );
+
     return (
         <table className="border-separate border-spacing-[2px]">
             <tbody>
@@ -36,7 +35,7 @@ export function Calendar({activities}: {activities: LifeActivity[]}) {
     );
 }
 
-function Year({index, numWeeks, events}: {index: number, numWeeks: number, events: number[]}) {
+function Year({index, numWeeks, events}: {index: number, numWeeks: number, events: [number, string][]}) {
     return (
         <tr>
             {Array.from({length: numWeeks}).map((_, colIndex) => {
@@ -48,25 +47,21 @@ function Year({index, numWeeks, events}: {index: number, numWeeks: number, event
     )
 }
 
-function Week({index, events}: {index: number, events: number[]}) {
-    const colors = [
-        "bg-[#444]",
-        "bg-red-500",
-        "bg-orange-500",
-        "bg-yellow-500",
-        "bg-green-500",
-        "bg-blue-500",
-        "bg-purple-500"
-    ];
+function Week({index, events}: {index: number, events: [number, string][]}) {
     let color = "";
-    let sum = [...events].reduce((a, b) => a + b, 0);
+    let sum = events.map(([weeks]) => weeks).reduce((a, b) => a + b, 0);
     for (let i = events.length-1; i > -1; --i) {
         if (index < sum) {
-            color = colors[i];
+            color = events[i][1];
         }
-        sum -= events[i];
+        sum -= events[i][0];
     }
     return (
-        <td className={`p-[0.333rem] border ${color === "" ? "border-[#bbb]" : "border-white/0"} rounded-sm ${color}`}/>
+        <td
+            style={{
+                backgroundColor: color
+            }}
+            className={`p-[0.333rem] border ${color === "" ? "border-[#bbb]" : "border-white/0"} rounded-sm `}
+        />
     )
 }
