@@ -11,17 +11,19 @@ export function Calendar({activities}: {activities: LifeActivity[]}) {
 
     const events = [diffWeeks(birthDate, today)].concat(
         activities.map(({start, end, timeSpent, everyday}) => {
-            let startDate = start;
+            let startDate = start.unix() < today.unix() ? today : start;
             let endDate = end;
             if (everyday) {
-                startDate = today;
+                startDate = birthDate.unix() < today.unix() ? today : birthDate;
                 endDate = today.add(lifeExpectancy, "years").subtract(today.unix() - birthDate.unix(), "seconds");
             }
+            if (endDate.unix() < startDate.unix()) 
+                return 0;
             return diffWeeks(startDate, endDate) * timeSpent / 24 / 60;
         })
     );
     return (
-        <table className="border-separate border-spacing-[1px]">
+        <table className="border-separate border-spacing-[2px]">
             <tbody>
                 {Array.from({length: Math.floor(lifeExpectancy)}).map((_, rowIndex) => {
                     return (
@@ -48,7 +50,7 @@ function Year({index, numWeeks, events}: {index: number, numWeeks: number, event
 
 function Week({index, events}: {index: number, events: number[]}) {
     const colors = [
-        "bg-black",
+        "bg-[#444]",
         "bg-red-500",
         "bg-orange-500",
         "bg-yellow-500",
@@ -65,6 +67,6 @@ function Week({index, events}: {index: number, events: number[]}) {
         sum -= events[i];
     }
     return (
-        <td className={`p-1.5 border border-black rounded-sm ${color}`}/>
+        <td className={`p-[0.333rem] border ${color === "" ? "border-[#bbb]" : "border-white/0"} rounded-sm ${color}`}/>
     )
 }

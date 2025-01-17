@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 #root {
-    width: 100vw
+    width: 100vw;
+    background-color: #222;
 }

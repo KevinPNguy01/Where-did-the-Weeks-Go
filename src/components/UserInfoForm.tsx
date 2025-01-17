@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { AddEvent } from "./AddEvent";
 import { Dayjs } from "dayjs";
+import { ActivityList } from "./ActivityList";
 
 export function UserInfoForm() {
     const {birthDate, setBirthDate, lifeExpectancy, setLifeExpectancy} = useContext(UserContext);
@@ -39,6 +40,7 @@ export function UserInfoForm() {
                 }}
             />
             <AddEvent/>
+            <ActivityList/>
         </Box>
     )
 }
