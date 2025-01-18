@@ -10,6 +10,10 @@ import Button from "@mui/material/Button/Button";
 import { LifeActivity } from "../../types/LifeActivity";
 import { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog/Dialog";
+import DialogTitle from "@mui/material/DialogTitle/DialogTitle";
+import DialogContent from "@mui/material/DialogContent/DialogContent";
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import Divider from "@mui/material/Divider/Divider";
 
 export function EventMenu({activity, edit, open, onClose, onSubmit}: {activity: LifeActivity, edit: boolean, open: boolean, onClose: () => void, onSubmit: () => void}) {
     const [color, setColor] = useState(activity.color);
@@ -35,29 +39,31 @@ export function EventMenu({activity, edit, open, onClose, onSubmit}: {activity: 
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <Box className="flex flex-col gap-4">
-                <Typography variant="h5">{`${edit ? "Edit" : "Add"} Activity`}</Typography>
+            <DialogTitle>{`${edit ? "Edit" : "Add"} Activity`}</DialogTitle>
+            <DialogContent className="flex flex-col !pt-1 gap-4">
                 <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)}/>
-                <TimeField
-                    label="Time Spent"
-                    value={timeSpent}
-                    onChange={(e) => {if (e) setTimeSpent(e)}}
-                    format="HH:mm"
-                    ampm={false}
-                />
-                <FormControlLabel 
-                    label="Every Day" 
-                    control={
-                        <Switch value={everyday} defaultChecked={everyday} onChange={(e) => setEveryday(e.target.checked)}/>
-                    }  
-                />
-                <Box>
-                    <DatePicker disabled={everyday} value={start} onChange={(e) => {if (e) setStart(e)}} label="From"/>
-                    <DatePicker disabled={everyday} value={end} onChange={(e) => {if (e) setEnd(e)}} label="To"/>
+                <Divider/>
+                <Box className="flex items-center gap-4">
+                    <AccessTimeIcon/>
+                    <Typography>Every Day</Typography>
+                    <Switch value={everyday} defaultChecked={everyday} onChange={(e) => setEveryday(e.target.checked)}/>
                 </Box>
+                <Box className="pl-9 grid grid-cols-2 gap-4">
+                    <DatePicker disabled={everyday} value={everyday ? null : start} onChange={(e) => {if (e) setStart(e)}} label={everyday ? "Now" : "From"}/>
+                    <DatePicker disabled={everyday} value={everyday ? null : end} onChange={(e) => {if (e) setEnd(e)}} label={everyday ? "Forever" : "To"}/>
+                    <TimeField
+                        className="col-span-2"
+                        label="Time Spent"
+                        value={timeSpent}
+                        onChange={(e) => {if (e) setTimeSpent(e)}}
+                        format="HH:mm"
+                        ampm={false}
+                    />
+                </Box>
+                <Divider/>
                 <MuiColorInput label="Color" format="rgb" value={color} onChange={(e) => setColor(e)}/>
-                <Button onClick={submitHandler}>{`${edit ? "Edit" : "Add"} Event`}</Button>
-            </Box>
+                <Button onClick={submitHandler}>{`${edit ? "Edit" : "Add"} Activity`}</Button>
+            </DialogContent>
         </Dialog>
     )
 }

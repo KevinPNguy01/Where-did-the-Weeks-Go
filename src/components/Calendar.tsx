@@ -8,8 +8,8 @@ export function Calendar({activities}: {activities: LifeActivity[]}) {
     const {birthDate, lifeExpectancy} = useContext(UserContext);
 
     const today = dayjs();
-
-    const events = [[diffWeeks(birthDate, today), "#444"]].concat(
+    const weeksLived = diffWeeks(birthDate, today);
+    const events = [[weeksLived, "#444"]].concat(
         activities.map(({start, end, timeSpent, everyday, color}) => {
             let startDate = start.unix() < today.unix() ? today : start;
             let endDate = end;
@@ -22,16 +22,18 @@ export function Calendar({activities}: {activities: LifeActivity[]}) {
     ) as [number, string][];
 
     return (
-        <table className="border-separate border-spacing-[2px]">
-            <tbody>
-                {Array.from({length: Math.floor(lifeExpectancy)}).map((_, rowIndex) => {
-                    return (
-                        <Year index={rowIndex} key={rowIndex} numWeeks={52} events={events}/>
-                    );
-                })}
-                <Year index={Math.floor(lifeExpectancy)} numWeeks={Math.floor((lifeExpectancy % 1) * 52)} events={events}/>
-            </tbody>
-        </table>
+        <>
+            <table className="border-separate border-spacing-[2px]">
+                <tbody>
+                    {Array.from({length: Math.floor(lifeExpectancy)}).map((_, rowIndex) => {
+                        return (
+                            <Year index={rowIndex} key={rowIndex} numWeeks={52} events={events}/>
+                        );
+                    })}
+                    <Year index={Math.floor(lifeExpectancy)} numWeeks={Math.floor((lifeExpectancy % 1) * 52)} events={events}/>
+                </tbody>
+            </table>
+        </>
     );
 }
 
