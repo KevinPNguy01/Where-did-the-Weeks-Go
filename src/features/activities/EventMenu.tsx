@@ -15,7 +15,7 @@ import DialogContent from "@mui/material/DialogContent/DialogContent";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Divider from "@mui/material/Divider/Divider";
 
-export function EventMenu({activity, edit, open, onClose, onSubmit}: {activity: LifeActivity, edit: boolean, open: boolean, onClose: () => void, onSubmit: () => void}) {
+export function EventMenu({activity, edit, open, onClose, onSubmit, onDelete}: {activity: LifeActivity, edit: boolean, open: boolean, onClose: () => void, onSubmit: () => void, onDelete?: () => void}) {
     const [color, setColor] = useState(activity.color);
     const [name, setName] = useState(activity.name);
     const [start, setStart] = useState(activity.start);
@@ -62,7 +62,12 @@ export function EventMenu({activity, edit, open, onClose, onSubmit}: {activity: 
                 </Box>
                 <Divider/>
                 <MuiColorInput label="Color" format="rgb" value={color} onChange={(e) => setColor(e)}/>
-                <Button onClick={submitHandler}>{`${edit ? "Edit" : "Add"} Activity`}</Button>
+                <Box className={onDelete ? "grid grid-cols-2" : ""}>
+                    {onDelete && (
+                        <Button color="error" onClick={onDelete}>Delete</Button>
+                    )}
+                    <Button className="w-full" onClick={submitHandler}>{`${edit ? "Edit" : "Add"} Activity`}</Button>
+                </Box>
             </DialogContent>
         </Dialog>
     )
