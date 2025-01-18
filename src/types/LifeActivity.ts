@@ -7,4 +7,5 @@ export type LifeActivity = {
     start: Dayjs
     end: Dayjs
     color: string
+    quote?: string
 }

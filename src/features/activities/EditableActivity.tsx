@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import IconButton from "@mui/material/IconButton/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
+import Tooltip from "@mui/material/Tooltip/Tooltip";
 
 export function EditableActivity({activity, index}: {activity: LifeActivity, index: number}) {
     const {activities, setActivities} = useContext(UserContext);
@@ -43,20 +44,22 @@ export function EditableActivity({activity, index}: {activity: LifeActivity, ind
                 onSubmit={handleSubmit}
                 onDelete={deleteHandler}
             />
-            <TableRow onClick={handleOpen} className="flex items-end gap-4 hover:bg-[#333] cursor-pointer">
-                <TableCell>
-                    <div className="rounded-full h-6 aspect-square" style={{backgroundColor: activity.color}}/>
-                </TableCell>
-                <TableCell>{activity.name}</TableCell>
-                <TableCell>{hoursText}{minutesText}</TableCell>
-                <TableCell className="!hidden md:!table-cell">{fromText}</TableCell>
-                <TableCell className="!hidden md:!table-cell">{toText}</TableCell>
-                <TableCell className="!hidden lg:!table-cell">
-                    <IconButton onClick={deleteHandler}>
-                        <DeleteIcon/>
-                    </IconButton>
-                </TableCell>
-            </TableRow>
+            <Tooltip placement="top" title={activity.quote}>
+                <TableRow onClick={handleOpen} className="flex items-end gap-4 hover:bg-[#333] cursor-pointer">
+                    <TableCell>
+                        <div className="rounded-full h-6 aspect-square" style={{backgroundColor: activity.color}}/>
+                    </TableCell>
+                    <TableCell>{activity.name}</TableCell>
+                    <TableCell>{hoursText}{minutesText}</TableCell>
+                    <TableCell className="!hidden md:!table-cell">{fromText}</TableCell>
+                    <TableCell className="!hidden md:!table-cell">{toText}</TableCell>
+                    <TableCell className="!hidden lg:!table-cell">
+                        <IconButton onClick={deleteHandler}>
+                            <DeleteIcon/>
+                        </IconButton>
+                    </TableCell>
+                </TableRow>
+            </Tooltip>
         </>
     )
 }

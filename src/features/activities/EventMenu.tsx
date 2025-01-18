@@ -3,7 +3,6 @@ import TextField from "@mui/material/TextField/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker/DatePicker";
 import { TimeField } from "@mui/x-date-pickers/TimeField/TimeField";
 import Typography from "@mui/material/Typography/Typography";
-import FormControlLabel from "@mui/material/FormControlLabel/FormControlLabel";
 import Switch from "@mui/material/Switch/Switch";
 import { MuiColorInput } from "mui-color-input";
 import Button from "@mui/material/Button/Button";
@@ -33,7 +32,7 @@ export function EventMenu({activity, edit, open, onClose, onSubmit, onDelete}: {
     }, [activity]);
 
     const submitHandler = () => {
-        Object.assign(activity, {color, name, start, end, everyday, timeSpent})
+        Object.assign(activity, {color, name, start, end, everyday, timeSpent, quote: ""})
         onSubmit();
     }
 

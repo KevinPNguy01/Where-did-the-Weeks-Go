@@ -23,7 +23,7 @@ export function UserInfoForm() {
 
     return (
         <Box 
-            className="p-4 flex flex-col items-center justify-center h-screen"
+            className="p-4 flex flex-col items-center justify-center min-w-screen"
             component="form" 
             sx={{backgroundColor:"background.paper"}}
         >

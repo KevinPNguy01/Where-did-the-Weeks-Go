@@ -25,7 +25,35 @@ function App() {
                 end: dayjs(),
                 timeSpent: dayjs("08:00", "HH:mm"),
                 everyday: true,
-                color: "#907BD2"
+                color: "#118ab2",
+                quote: "The average adult needs around 7-9 hours of sleep per night."
+            },
+            {
+                name: "Phone Screen Time",
+                start: dayjs(),
+                end: dayjs(),
+                timeSpent: dayjs("04:37", "HH:mm"),
+                everyday: true,
+                color: "#06d6a0",
+                quote: "The average person spends 4 hours and 37 minutes on their phone every day. Gen Z spends an average of over 6 hours per day!"
+            },
+            {
+                name: "Housework",
+                start: dayjs(),
+                end: dayjs(),
+                timeSpent: dayjs("02:25", "HH:mm"),
+                everyday: true,
+                color: "#ffd166",
+                quote: "This is how long the average American spends on household activities such as cooking, cleaning, etc. Women spend an average of 25% longer in this category than men!"
+            },
+            {
+                name: "Personal Care and Hygiene",
+                start: dayjs(),
+                end: dayjs(),
+                timeSpent: dayjs("00:46", "HH:mm"),
+                everyday: true,
+                color: "#ef476f",
+                quote: "This category includes self-care activities such as bathing and grooming."
             }
         ]);
     }, []);
