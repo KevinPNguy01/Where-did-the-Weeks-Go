@@ -63,7 +63,7 @@ function Week({index, events}: {index: number, events: [number, string][]}) {
             style={{
                 backgroundColor: color
             }}
-            className={`p-0.5 border ${color === "" ? "border-[#888]" : "border-white/0"} rounded-sm`}
+            className={`sm:p-[0.15vw] p-[0.5vw] border ${color === "" ? "border-[#888]" : "border-white/0"} rounded-sm`}
         />
     )
 }

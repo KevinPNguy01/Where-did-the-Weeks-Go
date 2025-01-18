@@ -7,6 +7,8 @@ import { UserContext } from "../contexts/UserContext";
 import { Dayjs } from "dayjs";
 import { ActivityList } from "../features/activities/ActivityList";
 import { AddEventButton } from "../features/activities/AddEventButton";
+import Typography from "@mui/material/Typography/Typography";
+import Divider from "@mui/material/Divider/Divider";
 
 export function UserInfoForm() {
     const {birthDate, setBirthDate, lifeExpectancy, setLifeExpectancy} = useContext(UserContext);
@@ -22,11 +24,13 @@ export function UserInfoForm() {
 
     return (
         <Box 
-            className="p-4 flex flex-col items-center gap-4"
+            className="p-4 flex flex-col items-center justify-center"
             component="form" 
             sx={{backgroundColor:"background.paper"}}
         >
-            <DatePicker value={birthDate} onChange={birthDateChangeHandler} label="Date of Birth"/>
+            <Typography variant="h6">Your Date of Birth</Typography>
+            <DatePicker value={birthDate} onChange={birthDateChangeHandler}/>
+            <br/>
             <TextField 
                 label="Life Expectancy"
                 type="number"
@@ -38,7 +42,9 @@ export function UserInfoForm() {
                         }
                 }}
             />
+            <br/>
             <ActivityList/>
+            <br/>
             <AddEventButton/>
         </Box>
     )
