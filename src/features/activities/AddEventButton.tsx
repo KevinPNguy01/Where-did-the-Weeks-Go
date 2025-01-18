@@ -1,4 +1,3 @@
-import Dialog from "@mui/material/Dialog/Dialog";
 import { EventMenu } from "./EventMenu";
 import { useContext, useState } from "react";
 import Fab from "@mui/material/Fab/Fab";
@@ -21,7 +20,7 @@ export function AddEventButton() {
     return (
         <>
             <EventMenu edit={false} open={open} onClose={handleClose} activity={activity} onSubmit={handleSubmit}/>
-            <Fab onClick={handleOpen} color="primary">
+            <Fab className="!relative" onClick={handleOpen} color="primary">
                 <AddIcon/>
             </Fab>
         </>

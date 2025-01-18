@@ -14,7 +14,7 @@ import DialogContent from "@mui/material/DialogContent/DialogContent";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Divider from "@mui/material/Divider/Divider";
 
-export function EventMenu({activity, edit, open, onClose, onSubmit, onDelete}: {activity: LifeActivity, edit: boolean, open: boolean, onClose: () => void, onSubmit: () => void, onDelete?: () => void}) {
+export function EventMenu({activity, edit, open, onClose, onSubmit, onDelete}: {activity: LifeActivity, edit: boolean, open: boolean, onClose: () => void, onSubmit: () => void, onDelete?: (e: React.MouseEvent) => void}) {
     const [color, setColor] = useState(activity.color);
     const [name, setName] = useState(activity.name);
     const [start, setStart] = useState(activity.start);

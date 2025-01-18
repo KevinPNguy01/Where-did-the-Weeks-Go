@@ -28,7 +28,8 @@ export function EditableActivity({activity, index}: {activity: LifeActivity, ind
         setActivities([...activities]);
         handleClose();
     }
-    const deleteHandler = () => {
+    const deleteHandler = (e: React.MouseEvent) => {
+        e.stopPropagation();
         activities.splice(index, 1);
         setActivities([...activities]);
         handleClose();
@@ -50,10 +51,10 @@ export function EditableActivity({activity, index}: {activity: LifeActivity, ind
                         <div className="rounded-full h-6 aspect-square" style={{backgroundColor: activity.color}}/>
                     </TableCell>
                     <TableCell>{activity.name}</TableCell>
-                    <TableCell>{hoursText}{minutesText}</TableCell>
-                    <TableCell className="!hidden md:!table-cell">{fromText}</TableCell>
-                    <TableCell className="!hidden md:!table-cell">{toText}</TableCell>
-                    <TableCell className="!hidden lg:!table-cell">
+                    <TableCell className="!hidden md:!table-cell">{hoursText}{minutesText}</TableCell>
+                    <TableCell className="!hidden lg:!table-cell">{fromText}</TableCell>
+                    <TableCell className="!hidden lg:!table-cell">{toText}</TableCell>
+                    <TableCell className="!hidden xl:!table-cell">
                         <IconButton onClick={deleteHandler}>
                             <DeleteIcon/>
                         </IconButton>

@@ -62,11 +62,12 @@ function App() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <ThemeProvider theme={theme}>
                 <UserContext.Provider value={{birthDate, setBirthDate, lifeExpectancy, setLifeExpectancy, activities, setActivities}}>
-                    <div className='sm:grid grid-cols-2 p-4 gap-4'>
-                        <Box className="flex flex-col items-center">
-                            <Typography textAlign="center" variant="h4" fontWeight="bold">Your Life in Weeks</Typography>
-                            <Typography textAlign="center" fontSize={12}>Time is precious. How are you spending it?</Typography>
-                            <br/>
+                    <div className='flex flex-col sm:grid grid-cols-2 gap-4'>
+                        <Box className="md:min-h-screen p-4 h-fit flex flex-col justify-center items-center gap-2">
+                            <Box>
+                                <Typography textAlign="center" variant="h4" fontWeight="bold">Your Life in Weeks</Typography>
+                                <Typography textAlign="center" fontSize={12}>Time is precious. How are you spending it?</Typography>
+                            </Box>
                             <Calendar activities={activities}/>
                         </Box>
                         <UserInfoForm/>

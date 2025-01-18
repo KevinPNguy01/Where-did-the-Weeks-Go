@@ -14,10 +14,10 @@ export function WeeksLived() {
                 <div className="rounded-full h-6 aspect-square" style={{backgroundColor: "#444"}}/>
             </TableCell>
             <TableCell>Weeks Lived</TableCell>
-            <TableCell/>
-            <TableCell className="!hidden md:!table-cell"/>
             <TableCell className="!hidden md:!table-cell"/>
             <TableCell className="!hidden lg:!table-cell"/>
+            <TableCell className="!hidden lg:!table-cell"/>
+            <TableCell className="!hidden xl:!table-cell"/>
         </TableRow>
     );
 }
@@ -29,10 +29,10 @@ export function WeeksLeft() {
                 <div className="h-6 aspect-square rounded-full border-2 border-[#888]"/>
             </TableCell>
             <TableCell>Weeks Left</TableCell>
-            <TableCell/>
-            <TableCell className="!hidden md:!table-cell"/>
             <TableCell className="!hidden md:!table-cell"/>
             <TableCell className="!hidden lg:!table-cell"/>
+            <TableCell className="!hidden lg:!table-cell"/>
+            <TableCell className="!hidden xl:!table-cell"/>
         </TableRow>
     );
 }
