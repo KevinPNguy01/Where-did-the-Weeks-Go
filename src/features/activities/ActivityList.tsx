@@ -1,30 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import TableHead from "@mui/material/TableHead/TableHead";
 import TableCell from "@mui/material/TableCell/TableCell";
 import TableRow from "@mui/material/TableRow/TableRow";
 import Table from "@mui/material/Table/Table";
 import TableBody from "@mui/material/TableBody/TableBody";
-import dayjs from "dayjs";
-import { EventMenu } from "./EventMenu";
+import { EditableActivity } from "./EditableActivity";
+import { WeeksLeft, WeeksLived } from "./NonEditableActivity";
 
 export function ActivityList() {
-    const {activities, setActivities, birthDate} = useContext(UserContext);
-    const [open, setOpen] = useState(false);
-    
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    const handleSubmit = () => {
-        setActivities([...activities]);
-        handleClose();
-    }
-    const deleteHandler = (index: number) => () => {
-        activities.splice(index, 1);
-        setActivities([...activities]);
-        handleClose();
-    };
-
-    const today = dayjs();
+    const {activities} = useContext(UserContext);
     
     return (
         <Table>
@@ -32,43 +17,16 @@ export function ActivityList() {
                 <TableRow>
                     <TableCell/>
                     <TableCell>Activity</TableCell>
+                    <TableCell>Time Spent</TableCell>
+                    <TableCell className="!hidden md:!table-cell">From</TableCell>
+                    <TableCell className="!hidden md:!table-cell">To</TableCell>
+                    <TableCell className="!hidden lg:!table-cell"/>
                 </TableRow>
             </TableHead>
             <TableBody>
-                {birthDate.unix() < today.unix() && (
-                    <TableRow className="flex items-end gap-4">
-                        <TableCell>
-                            <div className="rounded-full h-6 aspect-square" style={{backgroundColor: "#444"}}/>
-                        </TableCell>
-                        <TableCell>Weeks Lived</TableCell>
-                    </TableRow>
-                )}
-                {activities.map((activity, index) => {
-                    return (
-                        <>
-                            <EventMenu 
-                                edit={true} 
-                                open={open} 
-                                onClose={handleClose} 
-                                activity={activity} 
-                                onSubmit={handleSubmit}
-                                onDelete={deleteHandler(index)}
-                            />
-                            <TableRow onClick={handleOpen} className="flex items-end gap-4 hover:bg-[#333] cursor-pointer">
-                                <TableCell>
-                                    <div className="rounded-full h-6 aspect-square" style={{backgroundColor: activity.color}}/>
-                                </TableCell>
-                                <TableCell>{activity.name}</TableCell>
-                            </TableRow>
-                        </>
-                    )
-                })}
-                <TableRow className="flex items-end gap-4">
-                    <TableCell>
-                        <div className="h-6 aspect-square rounded-full border-2 border-[#888]"/>
-                    </TableCell>
-                    <TableCell>Weeks Left</TableCell>
-                </TableRow>
+                <WeeksLived/>
+                {activities.map((activity, index) => <EditableActivity key={index} activity={activity} index={index}/>)}
+                <WeeksLeft/>
             </TableBody>
         </Table>
     )

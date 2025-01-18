@@ -8,7 +8,6 @@ import { Dayjs } from "dayjs";
 import { ActivityList } from "../features/activities/ActivityList";
 import { AddEventButton } from "../features/activities/AddEventButton";
 import Typography from "@mui/material/Typography/Typography";
-import Divider from "@mui/material/Divider/Divider";
 
 export function UserInfoForm() {
     const {birthDate, setBirthDate, lifeExpectancy, setLifeExpectancy} = useContext(UserContext);
@@ -24,7 +23,7 @@ export function UserInfoForm() {
 
     return (
         <Box 
-            className="p-4 flex flex-col items-center justify-center"
+            className="p-4 flex flex-col items-center justify-center h-screen"
             component="form" 
             sx={{backgroundColor:"background.paper"}}
         >
