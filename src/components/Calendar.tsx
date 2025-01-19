@@ -23,7 +23,7 @@ export function Calendar({activities}: {activities: LifeActivity[]}) {
 
     return (
         <>
-            <table className="border-separate border-spacing-[2px]">
+            <table className="border-separate border-spacing-[1px]">
                 <tbody>
                     {Array.from({length: Math.floor(lifeExpectancy)}).map((_, rowIndex) => {
                         return (
@@ -63,7 +63,7 @@ function Week({index, events}: {index: number, events: [number, string][]}) {
             style={{
                 backgroundColor: color
             }}
-            className={`sm:p-[0.16vw] p-[0.48vw] border ${color === "" ? "border-[#888]" : "border-white/0"} rounded-sm`}
+            className={`sm:p-[.2rem] p-[.1rem] border ${color === "" ? "border-[#888]" : "border-white/0"} rounded-sm`}
         />
     )
 }

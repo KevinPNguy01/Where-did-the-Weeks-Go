@@ -23,11 +23,11 @@ export function UserInfoForm() {
 
     return (
         <Box 
-            className="gap-4 p-8 flex flex-col items-center justify-center min-w-screen w-fit"
+            className="gap-4 p-4 sm:p-8 flex flex-col w-full items-center justify-center min-w-screen w-fit"
             component="form" 
             sx={{backgroundColor:"background.paper"}}
         >
-            <Card className="w-full p-8 gap-8 grid grid-cols-2 items-end place-items-center">
+            <Card className="w-full p-8 gap-4 sm:gap-8 flex flex-col sm:grid grid-cols-2 items-end place-items-center">
                 <Box className="flex flex-col w-full">
                     <Typography fontSize="1.1rem" fontWeight="bold">Date of Birth</Typography>
                     <DatePicker value={birthDate} onChange={birthDateChangeHandler}/>
